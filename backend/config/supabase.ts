@@ -1,4 +1,3 @@
-// Db password : 6#uwPVWGMww/7wr
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 dotenv.config();
