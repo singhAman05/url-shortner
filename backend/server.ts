@@ -3,6 +3,7 @@ import http from 'http'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import urlRouter from './routes/url_route';
+import { updateLastUsedJob } from './jobs/lastUsed_updation_job';
 
 dotenv.config()
 
@@ -16,6 +17,9 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/url',urlRouter);
+
+// Jobs
+updateLastUsedJob();
 
 server.listen(8000,()=>{
     console.log("The server is listening at 8000");

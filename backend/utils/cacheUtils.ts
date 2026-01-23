@@ -27,3 +27,11 @@ export const deleteCache = async (key: string) => {
         console.error('Redis DEL error:', err);
     }
 };
+
+export const recordLastUsed = async (shortId: string) => {
+    try{
+        await redisClient.hSet('metaData:lastUsed', shortId, Date.now().toString());
+    }catch(err){
+        console.error('Redis recordLastUsed error:', err);
+    }
+}
