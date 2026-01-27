@@ -24,7 +24,11 @@ export const handlefetchUrl = async(req: Request, res: Response) => {
             const { status, message } = ERROR_MAP[response.error];
             return res.status(status).json({ message });
         }
-        await setCache(cacheKey, response.data.original_url, response.data.ttl);
+        if (!response.data) {
+            const { status, message } = ERROR_MAP.INTERNAL_ERROR;
+            return res.status(status).json({ message });
+        }
+        await setCache(cacheKey, response?.data.original_url, response.data.ttl);
         recordLastUsed(shortId);
         return res.redirect(response.data.original_url);
     }
